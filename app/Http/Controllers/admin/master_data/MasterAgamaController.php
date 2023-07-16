@@ -30,6 +30,8 @@ class MasterAgamaController extends Controller
         ]);
         MasterAgamaModel::create([
             'nama_agama' => $req->nama_agama,
+            'created_by' => auth()->user()->id
+
         ]);
 
         Toastr::success(' Berhasil ', 'Tambah Agama');
@@ -52,6 +54,7 @@ class MasterAgamaController extends Controller
 
         $update_agama = MasterAgamaModel::where('id', $id)->update([
             'nama_agama'     => $req->nama_agama,
+            'updated_by' => auth()->user()->id
         ]);
 
         if ($update_agama) {
