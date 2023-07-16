@@ -189,22 +189,34 @@ class JadwalBuktiBayarController extends Controller
             'm_paket.jenis_paket',
             'm_paket.biaya_paket',
             'dt_jam_pelajaran.id_hari',
-            'm_hari.id as id_hari',
-            'm_hari.id as nama_hari',
+            // 'm_hari.id as id_hari',
+            // 'm_hari.id as nama_hari',
             'dt_jam_pelajaran.jam_mulai',
             'dt_jam_pelajaran.jam_selesai',
             'dt_jadwal_siswa.bukti_bayar',
             'dt_jadwal_siswa.status_bayar',
             'dt_jadwal_siswa.keterangan',
+            'dt_jadwal_siswa.metode_bayar',
 
 
         )
             ->leftjoin('dt_pendaftar', 'dt_jadwal_siswa.id_pendaftar', 'dt_pendaftar.id')
             ->leftjoin('dt_jam_pelajaran', 'dt_jadwal_siswa.id_jam_pelajaran', 'dt_jam_pelajaran.id')
             ->leftjoin('m_paket', 'dt_jam_pelajaran.id_paket', 'm_paket.id')
-            ->leftjoin('m_hari', 'dt_jam_pelajaran.id_hari', 'm_hari.id')
 
             ->firstWhere('dt_jadwal_siswa.id', $id);
+
+        $decode_hari = json_decode($detail->id_hari);
+
+        $master_hari = MasterHariModel::select(
+            'nama_hari'
+        )
+            ->whereIn('id', $decode_hari)->get();
+
+        $arr_hari = [];
+        foreach ($master_hari as $value) {
+            $arr_hari[] = $value->nama_hari;
+        }
 
         $item_bayar = DB::table('m_item_bayar')->get()->pluck('biaya_item');
 
@@ -216,10 +228,8 @@ class JadwalBuktiBayarController extends Controller
 
         $jml_total_item = array_sum($arr_item);
         $total_bayar = $jml_total_item + $detail->biaya_paket;
-        $decode_hari = json_decode($detail->id_hari);
 
-
-        return view('admin.data.jadwal-buktibayar.detail', compact('detail', 'total_bayar', 'decode_hari'));
+        return view('admin.data.jadwal-buktibayar.detail', compact('detail', 'total_bayar', 'decode_hari', 'arr_hari'));
     }
 
     public function update(Request $req, $id)

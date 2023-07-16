@@ -46,8 +46,10 @@ class PilihKBMController extends Controller
         $has_daftar = FormJadwalSiswaModel::firstWhere('id_pendaftar', $pendaftar->id);
 
         if ($has_daftar) {
-            Toastr::warning('Anda Sudah Mengisi Jadwal KBM dan Melakukan Pembayaran', 'Silahkan Hubungi Admin!');
-            return redirect('/');
+            if ($has_daftar->status_bayar == 1) {
+                Toastr::warning('Anda Sudah Mengisi Jadwal KBM dan Melakukan Pembayaran', 'Silahkan Hubungi Admin!');
+                return redirect('/');
+            }
         }
 
         $item_bayar = DB::table('m_item_bayar')->get();
@@ -150,9 +152,11 @@ class PilihKBMController extends Controller
         $path_bukti_storage = 'dokumen/' . $user . '/bukti_bayar';
 
         try {
-            $save = FormJadwalSiswaModel::create(
+            $save = FormJadwalSiswaModel::updateOrCreate(
                 [
                     'id_pendaftar' => $dt_pendaftar->id,
+                ],
+                [
                     'id_jam_pelajaran' => $req->jadwal,
                     'metode_bayar' => $req->metode_bayar,
                 ]

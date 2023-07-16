@@ -98,8 +98,10 @@
         <div class="container">
             <div class="card ">
                 <div class="text-center">
-                    <h3><b> Pembayaran Anda Gagal </b></h3>
-                    <h4><b>{{ $jadwal->keterangan }}</b> </h4>
+                    <h3 class="text-danger"><b> Pembayaran Anda Gagal </b></h3>
+                    <h4><b>"{{ $jadwal->keterangan }}"</b> </h4>
+                    <p>Silahkan Klik tombol dibawah ini untuk cek jadwal dan pembayaran anda</p>
+                    <a class="btn btn-primary" href="{{ route('get_status_pembayaran', auth()->user()->id) }}">Cek</a>
                 </div>
             </div>
         </div>

@@ -35,8 +35,8 @@ class MasterDokumenController extends Controller
         $save_data = MasterDokumenModel::create([
             'jenis_dokumen' => $req->jenis_dokumen,
             'nama_request' => $nama_request,
-            'validasi' => $validasi
-
+            'validasi' => $validasi,
+            'created_by' => auth()->user()->id,
         ]);
 
         if ($save_data) {
@@ -67,7 +67,8 @@ class MasterDokumenController extends Controller
         $update_dokumen = MasterDokumenModel::where('id', $id)->update([
             'jenis_dokumen' => $req->jenis_dokumen,
             'nama_request' => $nama_request,
-            'validasi' => $validasi
+            'validasi' => $validasi,
+            'updated_by' => auth()->user()->id
         ]);
         if ($update_dokumen) {
             Toastr::success('Berhasil', 'Update Nama Dokumen');

@@ -78,7 +78,7 @@ class HomeController extends Controller
             ->leftjoin('m_paket', 'dt_jam_pelajaran.id_paket', 'm_paket.id')
             ->orderBy('created_at', 'DESC')
             ->first();
-        // dd($user, $user_role, $pendaftar, $jadwal);
+
         if ($jadwal != null) {
 
             $item_bayar = ItemBayarModel::get()->pluck('biaya_item');
@@ -103,5 +103,26 @@ class HomeController extends Controller
 
 
         return view('customer.validasi_pendaftaran', compact('user', 'pendaftar', 'jadwal',));
+    }
+
+    public function getStatus($user)
+    {
+        $dt_pendaftar = PendaftaranSiswaModel::firstwhere('user_id', $user);
+        $dt_pendaftar->status = null;
+        $dt_pendaftar->update();
+
+        Toastr::warning('Silahkan Cek data diri, ayah, ibu dan dokumen', 'Perhatian!!!');
+        return redirect('form-pendaftaran');
+    }
+    public function getStatuspembayaran($user)
+    {
+        $dt_pendaftar = PendaftaranSiswaModel::firstwhere('user_id', $user);
+
+        $dt_bayar = FormJadwalSiswaModel::firstwhere('id_pendaftar', $dt_pendaftar->id);
+        $dt_bayar->status_bayar = null;
+        $dt_bayar->update();
+
+        Toastr::warning('Silahkan Cek data Jadwal dan pembayaran anda', 'Perhatian!!!');
+        return redirect('form-pilih-jadwal');
     }
 }

@@ -26,7 +26,10 @@ class MasterPekerjaanController extends Controller
         $data_pekerjaan = $req->validate([
             'jenis_pekerjaan' => ['required']
         ]);
-        $savepekerjaan = MasterPekerjaanModel::create($data_pekerjaan);
+        $savepekerjaan = MasterPekerjaanModel::create([
+            'jenis_pekerjaan' => $req->jenis_pekerjaan,
+            'created_by' => auth()->user()->id
+        ]);
 
         if ($savepekerjaan) {
             Toastr::success(' Berhasil ', 'Tambah Pekerjaan');
@@ -48,7 +51,10 @@ class MasterPekerjaanController extends Controller
         $update = $req->validate([
             'jenis_pekerjaan' => ['required']
         ]);
-        $update_pekerjaan = MasterPekerjaanModel::where('id', $id)->update($update);
+        $update_pekerjaan = MasterPekerjaanModel::where('id', $id)->update([
+            'jenis_pekerjaan' => $req->jenis_pekerjaan,
+            'updated_by' => auth()->user()->id
+        ]);
         if ($update_pekerjaan) {
             Toastr::success(' Berhasil ', 'Update Pekerjaan');
             return redirect('/master-pekerjaan');
