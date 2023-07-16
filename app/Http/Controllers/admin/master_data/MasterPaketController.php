@@ -30,6 +30,7 @@ class MasterPaketController extends Controller
         MasterPaketModel::create([
             'jenis_paket' => $req->jenis_paket,
             'biaya_paket' => $req->biaya_paket,
+            'created_by' => auth()->user()->id
         ]);
 
         Toastr::success(' Berhasil ', 'Tambah Paket');
@@ -54,6 +55,7 @@ class MasterPaketController extends Controller
         $update_paket = MasterPaketModel::where('id', $id)->update([
             'jenis_paket' => $req->jenis_paket,
             'biaya_paket' => $req->biaya_paket,
+            'updated_by' => auth()->user()->id
         ]);
 
         if ($update_paket) {

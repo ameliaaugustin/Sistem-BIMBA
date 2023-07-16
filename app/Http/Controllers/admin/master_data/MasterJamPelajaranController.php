@@ -88,6 +88,7 @@ class MasterJamPelajaranController extends Controller
             'id_hari' => $json_hari,
             'jam_mulai' => $req->jam_mulai,
             'jam_selesai' => $req->jam_selesai,
+            'created_by' => auth()->user()->id
         ]);
 
         Toastr::success(' Berhasil ', 'Tambah Jadwal');
@@ -128,6 +129,7 @@ class MasterJamPelajaranController extends Controller
             'id_hari' => $json_hari,
             'jam_mulai' => $req->jam_mulai,
             'jam_selesai' => $req->jam_selesai,
+            'updated_by' => auth()->user()->id
         ]);
 
         if ($update_jadwal) {

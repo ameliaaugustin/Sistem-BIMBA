@@ -15,6 +15,7 @@ class Item_bayarController extends Controller
         $item_bayar = ItemBayarModel::get();
         return view('admin.master-data.master-item-bayar.index', compact('item_bayar'));
     }
+
     public function create()
     {
         return view('admin.master-data.master-item-bayar.create');
@@ -26,7 +27,11 @@ class Item_bayarController extends Controller
             'nama_item' => ['required'],
             'biaya_item' => ['required'],
         ]);
-        $save = ItemBayarModel::create($item_bayar);
+        $save = ItemBayarModel::create([
+            'nama_item' => $req->nama_item,
+            'biaya_item' => $req->biaya_item,
+            'created_by' => auth()->user()->id,
+        ]);
 
         if ($save) {
             Toastr::success(' Berhasil ', 'Tambah Item Bayar');
@@ -36,18 +41,24 @@ class Item_bayarController extends Controller
             return back();
         }
     }
+
     public function edit($id)
     {
         $item_edit = ItemBayarModel::find($id);
         return view('admin.master-data.master-item-bayar.edit', compact('item_edit'));
     }
+
     public function update(Request $req, $id)
     {
         $item = $req->validate([
             'nama_item' => ['required'],
             'biaya_item' => ['required']
         ]);
-        $update_item = ItemBayarModel::where('id', $id)->update($item);
+        $update_item = ItemBayarModel::where('id', $id)->update([
+            'nama_item' => $req->nama_item,
+            'biaya_item' => $req->biaya_item,
+            'updated_by' => auth()->user()->id,
+        ]);
 
         if ($update_item) {
             Toastr::success(' Berhasil ', 'Edit Item Bayar');
@@ -57,6 +68,7 @@ class Item_bayarController extends Controller
             return back();
         }
     }
+
     public function destroy($id)
     {
         $item_destroy = ItemBayarModel::where('id', $id)->delete();

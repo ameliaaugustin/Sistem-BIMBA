@@ -24,7 +24,10 @@ class UserRoleController extends Controller
         $role = $req->validate([
             'role_name' => ['required']
         ]);
-        $save_role = UserRoles::create($role);
+        $save_role = UserRoles::create([
+            'role_name' => $req->role_name,
+            'created_by' => auth()->user()->id
+        ]);
 
         if ($save_role) {
             Toastr::success(' Berhasil ', 'Tambah Role');
@@ -44,7 +47,10 @@ class UserRoleController extends Controller
         $roles = $req->validate([
             'role_name' => ['required']
         ]);
-        $update_role = UserRoles::where('id', $id)->update($roles);
+        $update_role = UserRoles::where('id', $id)->update([
+            'role_name' => $req->role_name,
+            'created_by' => auth()->user()->id
+        ]);
 
         if ($update_role) {
             Toastr::success(' Berhasil ', 'Edit Role');
