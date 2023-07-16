@@ -39,15 +39,20 @@
                                     <p class="card-text">: {{ $detail->nama_lengkap ?? '' }}</p>
                                     <p class="card-text">: {{ $detail->jenis_paket ?? '' }}</p>
                                     <p class="card-text">:
-                                        @foreach ($detail as $hari)
-                                            {{ $hari->nama_hari ?? '' }}
+                                        @foreach ($arr_hari as $hari)
+                                            {{ $hari }}
                                         @endforeach
                                         {{ $detail->jam_mulai . '-' . $detail->jam_selesai ?? '' }}
                                     </p>
                                     <p class="card-text">: {{ $total_bayar ?? '' }}</p>
-                                    <p class="card-text">: <a target="_blank"
-                                            href="{{ asset('storage/' . $detail['bukti_bayar']) }}"
-                                            class="btn btn-primary">Lihat</a> </p>
+                                    <p class="card-text">:
+                                        @if ($detail->metode_bayar == 'CASH')
+                                            Cash
+                                        @else
+                                            <a target="_blank" href="{{ asset('storage/' . $detail['bukti_bayar']) }}"
+                                                class="btn btn-primary">Lihat</a>
+                                        @endif
+                                    </p>
                                 @endif
                             </label>
                         </div>

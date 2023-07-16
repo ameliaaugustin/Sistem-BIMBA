@@ -95,7 +95,7 @@
                                         @foreach ($dt_pendaftar as $dt_pend)
                                             <tr>
                                                 <td colspan="1" style="width: 5%">{{ $count++ }}</td>
-                                                <td class="text-center">{{ $dt_pend->nama_lengkap }}</td>
+                                                <td class="text-start">{{ $dt_pend->nama_lengkap }}</td>
                                                 <td class="text-center">{{ $dt_pend->tempat_lahir }}</td>
                                                 <td class="text-center">{{ $dt_pend->tanggal_lahir }}</td>
                                                 <td class="text-center">

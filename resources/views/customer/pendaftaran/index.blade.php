@@ -224,8 +224,7 @@
                                     <div class="row">
                                         <div class="col-sm-2">
                                             <select class="form-select @error('sosmed_options') is-invalid @enderror"
-                                                name="sosmed_options" id="sosmedOptions"
-                                                onchange="klikSosmed(); klikUserAfiliate();">
+                                                name="sosmed_options" id="sosmedOptions" onchange="getUserAffiliate()">
                                                 <option value="null">Pilih</option>
                                                 <option value="Google"
                                                     {{ isset($pendaftar) ? ($pendaftar->sosmed_options == 'Google' ? 'selected' : '') : '' }}>
@@ -249,7 +248,7 @@
                                         </div>
                                         <div class="col-sm-5">
                                             <select class="form-select" name="afiliate_from" id="afliliateFrom"
-                                                onchange="klikUserAfiliate();">
+                                                onchange="affliateElse();" disabled>
                                                 <option value="null">Pilih</option>
                                                 <option value="Lainnya"
                                                     {{ isset($pendaftar) ? ($pendaftar->user_id_affiliate == 'Lainnya' ? 'selected' : '') : '' }}>
@@ -268,7 +267,8 @@
                                             <input class="form-control  @error('else_user_afiliate') is-invalid @enderror"
                                                 name="else_user_afiliate" type="text" id="elseUserAfiliate"
                                                 placeholder="Masukkan nama yang memberitahu"
-                                                value="{{ isset($pendaftar) ? $pendaftar->nama_afiliate : (old('nama') != '' ? old('nama') : '') }}">
+                                                value="{{ isset($pendaftar) ? $pendaftar->nama_afiliate : (old('nama') != '' ? old('nama') : '') }}"
+                                                disabled>
                                             @error('else_user_afiliate')
                                                 <small class="form-text text-danger">{{ $message }}</small>
                                             @enderror
@@ -536,32 +536,42 @@
         </div>
     </div>
 
-    <script type="text/javascript">
+    <script>
         $(document).ready(function() {
-            klikSosmed()
-            klikUserAfiliate()
+            $('#sosmedOptions').change(function() {
+                var value = $(this).val();
+
+                if (value == 'Lainnya') {
+                    $('#elseUserAfiliate').prop('disabled', false);
+                } else {
+                    $('#elseUserAfiliate').prop('disabled', true);
+                    $('#elseUserAfiliate').val('');
+                    $('#afliliateFrom').val('');
+                }
+            })
         });
     </script>
 
     <script type="text/javascript">
-        function klikSosmed() {
-            var klik_sosmed = $('#sosmedOptions').val();
+        function getUserAffiliate() {
+            var sosmed_value = $('#sosmedOptions').val();
 
-            if (klik_sosmed == 'Lainnya') {
-                document.getElementById("afliliateFrom").style.display = "block";
+            if (sosmed_value == 'Lainnya') {
+                $('#afliliateFrom').prop('disabled', false);
             } else {
-                document.getElementById("afliliateFrom").style.display = "none";
+                $('#afliliateFrom').prop('disabled', true);
+
             }
         }
 
-        function klikUserAfiliate() {
-            var afiliateFrom = $('#afliliateFrom').val();
+        function affliateElse() {
+            var user_affiliate = $('#afliliateFrom').val();
 
-            if (afiliateFrom == 'Lainnya') {
-                document.getElementById("elseUserAfiliate").style.display = "block";
+            if (user_affiliate == 'Lainnya') {
+                $('#elseUserAfiliate').prop('disabled', false);
             } else {
-                document.getElementById("elseUserAfiliate").style.display = "none";
-
+                $('#elseUserAfiliate').prop('disabled', true);
+                $('#elseUserAfiliate').val('');
             }
         }
     </script>

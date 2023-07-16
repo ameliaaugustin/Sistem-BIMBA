@@ -156,6 +156,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/excel-data-pendaftar/{status}', [PendaftarController::class, 'excel'])->name('cetak_data_pend');
     Route::get('/excel-data-jadwal-buktibayar/{status_bayar}', [JadwalBuktiBayarController::class, 'excel'])->name('cetak_data_jadwalbuktibayar');
     Route::get('/excel-data-afiliasi/{role_search}', [AffiliasiController::class, 'excel'])->name('cetak_data_affiliasi');
+
+
+    Route::get('validasi-pendaftar/{user}', [HomeController::class, 'getStatus'])->name('get_status');
+    Route::get('validasi-pembayaray/{user}', [HomeController::class, 'getStatuspembayaran'])->name('get_status_pembayaran');
 });
 
 

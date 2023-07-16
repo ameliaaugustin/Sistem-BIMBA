@@ -33,7 +33,9 @@
                 <div class="card-header text-center">
                     <h3 class="text-danger">Pendaftaran Ditolak</h3>
                     <strong>
-                        <h4>{{ $pendaftar->keterangan }}</h4>
+                        <h4>"{{ $pendaftar->keterangan }}"</h4>
+                        <p>Silahkan klik Tombol dibawah ini untuk mengecek kembali data anda</p>
+                        <a class="btn btn-primary" href="{{ route('get_status', auth()->user()->id) }}">Cek</a>
                     </strong>
                 </div>
             </div>
