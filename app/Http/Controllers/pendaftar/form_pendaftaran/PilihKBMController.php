@@ -46,7 +46,7 @@ class PilihKBMController extends Controller
         $has_daftar = FormJadwalSiswaModel::firstWhere('id_pendaftar', $pendaftar->id);
 
         if ($has_daftar) {
-            if ($has_daftar->status_bayar == 1) {
+            if ($has_daftar->status_bayar == 'Y') {
                 Toastr::warning('Anda Sudah Mengisi Jadwal KBM dan Melakukan Pembayaran', 'Silahkan Hubungi Admin!');
                 return redirect('/');
             }

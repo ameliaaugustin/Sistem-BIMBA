@@ -97,12 +97,13 @@
                                                 <td colspan="1" style="width: 5%">{{ $count++ }}</td>
                                                 <td class="text-start">{{ $dt_pend->nama_lengkap }}</td>
                                                 <td class="text-center">{{ $dt_pend->tempat_lahir }}</td>
-                                                <td class="text-center">{{ $dt_pend->tanggal_lahir }}</td>
+                                                <td class="text-center">
+                                                    {{ date('d M Y', strtotime($dt_pend->tanggal_lahir)) }}</td>
                                                 <td class="text-center">
                                                     @if ($dt_pend->jenis_kelamin == 'L')
-                                                        <span class="text-success">Laki-laki</span>
+                                                        <span>Laki-laki</span>
                                                     @elseif ($dt_pend->jenis_kelamin == 'P')
-                                                        <span class="text-danger">Perempuan</span>
+                                                        <span>Perempuan</span>
                                                     @else
                                                         <span></span>
                                                     @endif
@@ -117,8 +118,10 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-end">
-                                                    <a class="btn btn-warning btn-sm"
-                                                        href="{{ route('detail_pendaftar', $dt_pend->id) }}">Detail</a>
+                                                    @if ($dt_pend->status != 'Y')
+                                                        <a class="btn btn-warning btn-sm"
+                                                            href="{{ route('detail_pendaftar', $dt_pend->id) }}">Detail</a>
+                                                    @endif
                                                 </td>
 
                                             </tr>

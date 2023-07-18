@@ -116,8 +116,10 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-end">
-                                                    <a class="btn btn-warning btn-sm"
-                                                        href="{{ route('detail_jadwal_buktibayar', $jadwal['id_jadwal']) }}">Detail</a>
+                                                    @if ($jadwal['status_bayar'] != 'Y')
+                                                        <a class="btn btn-warning btn-sm"
+                                                            href="{{ route('detail_jadwal_buktibayar', $jadwal['id_jadwal']) }}">Detail</a>
+                                                    @endif
                                                 </td>
 
                                             </tr>

@@ -11,8 +11,10 @@ use App\Models\admin\master_data\MasterPaketModel;
 
 class MasterJamPelajaranController extends Controller
 {
-    public function index()
+    public function index(Request $req)
     {
+        $jenis_paket = $req->jenis_paket;
+
         $master_jam_pel = MasterJamPelajaranModel::select(
             'dt_jam_pelajaran.id_hari',
             'dt_jam_pelajaran.id',
@@ -23,10 +25,13 @@ class MasterJamPelajaranController extends Controller
             'm_paket.id as id_paket',
 
         )
-
+            ->when($jenis_paket, function ($query, $jenis_paket) {
+                $query->where('id_paket', $jenis_paket);
+            })
             ->leftjoin('m_paket', 'dt_jam_pelajaran.id_paket', 'm_paket.id')
             ->get();
 
+        $paket = MasterPaketModel::get();
 
         $jadwals = [];
         if (isset($master_jam_pel)) {
@@ -46,12 +51,9 @@ class MasterJamPelajaranController extends Controller
             $master = [
                 'jadwals' => $jadwals,
                 'master_jam_pel' => $master_jam_pel,
-
+                'paket' => $paket,
             ];
         }
-
-
-
 
         return view('admin.master-data.master-jam-pelajaran.index', $master);
     }
