@@ -12,16 +12,44 @@
         </div>
     </div>
 
+    <div class="container-fluid mt-4 mb-3">
+        <form action="" method="GET">
+            @csrf
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group rounded">
+                        <select class="form-select" name="jenis_paket">
+                            <option hidden>Pilih Jenis Paket</option>
+                            @foreach ($paket as $value)
+                                <option value="{{ $value->id }}">{{ $value->jenis_paket }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                    <a class="btn btn-warning" href="{{ route('m_jam') }}">Reset</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <section class="tables">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header border-bottom">
-                            <p>
-                            <h3 class="h4 mb-0">Master Jam Pelajaran</h3>
-                            </p>
-                            <a class="btn btn-primary" href="{{ route('m_jamcreate') }}">Tambah</a>
+                            <div class="row justify-content-between">
+                                <div class="col">
+                                    <p>
+                                    <h3 class="h4 mb-0">Master Jam Pelajaran</h3>
+                                    </p>
+                                </div>
+                                <div class="col text-end">
+                                    <a class="btn btn-primary" href="{{ route('m_jamcreate') }}">Tambah</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
