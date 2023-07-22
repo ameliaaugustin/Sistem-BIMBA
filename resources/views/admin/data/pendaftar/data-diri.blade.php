@@ -68,8 +68,16 @@
                                 class="card-text">: {{ $pendaftar->old_alasan_keluar ?? '' }}</p>
                         </li>
                         <li class="list-group-item">Dari mana tahu Bimba Rainbow Kids? <p class="card-text">:
-                                {{ $pendaftar->sosmed_option ?? '' }} {{ $pendaftar->user_id ?? '' }}
-                                {{ $pendaftar->nama ?? '' }}</p>
+                                @if ($pendaftar->sosmed_options == 'Lainnya')
+                                    {{ $pendaftar->nama_afiliate }}
+                                @else
+                                    {{ $pendaftar->sosmed_options }}
+                                @endif
+                                @if ($pendaftar->fullname == 'Lainnya')
+                                    {{ $pendaftar->nama_afiliate }}
+                                @endif
+
+                            </p>
                         </li>
                         <li class="list-group-item">Alasan mengapa memilih Bimba Rainbow Kids? <p class="card-text">:
                                 {{ $pendaftar->alasan_memilih ?? '' }}</p>

@@ -12,7 +12,7 @@
                                 <header class="text-center mb-5">
                                     <h1 class="text-xxl text-gray-400 text-uppercase">BIMBA<strong class="text-primary">
                                             Rainbow Kids</strong></h1>
-                                    <p class="text-gray-500 fw-light">Silahkan Login</p>
+                                    <p class="text-gray-500 fw-light">Please Login</p>
                                 </header>
                                 <form class="login-form" method="POST" action="{{ route('loginAuth') }}">
                                     @csrf

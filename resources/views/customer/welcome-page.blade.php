@@ -14,7 +14,7 @@
 
     <header class="py-4">
         <div class="container-fluid py-2 text-center">
-            <h1 class="h3 fw-normal mb-0"><b>Selamat Datang {{ auth()->user()->fullname }}</b></h1>
+            <h1 class="h1 fw-normal text-success mb-0"><b>Selamat Datang {{ auth()->user()->fullname }}</b></h1>
         </div>
     </header>
     <div class="container">

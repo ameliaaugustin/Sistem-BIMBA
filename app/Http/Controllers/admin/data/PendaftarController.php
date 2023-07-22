@@ -144,13 +144,14 @@ class PendaftarController extends Controller
             'dt_afiliasi.sosmed_options',
 
             'dt_afiliasi.nama_afiliate',
+            'dt_afiliasi.user_id_affiliate',
 
             'users.fullname',
 
         )
             ->join('m_agama', 'dt_pendaftar.agama', 'm_agama.id')
             ->leftjoin('dt_afiliasi', 'dt_pendaftar.id', 'dt_afiliasi.id_pendaftar')
-            ->leftjoin('users', 'dt_pendaftar.user_id', 'users.id')
+            ->leftjoin('users', 'dt_afiliasi.user_id_affiliate', 'users.id')
             ->where('dt_pendaftar.id', $id)
             ->first();
 

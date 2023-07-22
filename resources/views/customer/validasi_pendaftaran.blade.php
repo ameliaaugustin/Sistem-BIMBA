@@ -13,14 +13,14 @@
     </div>
     <header class="py-4">
         <div class="container-fluid py-2 text-center">
-            <h1 class="h3 fw-normal mb-0"><b>Selamat Datang {{ auth()->user()->fullname }}</b></h1>
+            <h1 class="h1 fw-normal text-success mb-0"><b>Selamat Datang {{ auth()->user()->fullname }}</b></h1>
         </div>
     </header>
     @if ($pendaftar->status == 'Y')
         <div class="container">
             <div class="card">
                 <div class="card-header text-center">
-                    <h3 class="text-success">Pendaftaran Telah Berhasil</h3>
+                    <h3 class="text-success">Berkas Pendaftaran Telah Diterima</h3>
                     <strong>
                         <h4>Silahkan Memilih Jadwal Pada Menu "PEMILIHAN JADWAL KBM dan PEMBAYARAN"</h4>
                     </strong>
@@ -44,7 +44,8 @@
         <div class="container">
             <div class="card">
                 <div class="card-header text-center">
-                    <h3>Data Formulir Anda Sedang Di Validasi, Pastikan Data Formulir Pendaftaran dan Form Dokumen Sudah <b>
+                    <h3>Data Formulir Anda Sedang Menunggu Validasi, Pastikan Data Formulir Pendaftaran dan Form Dokumen
+                        Sudah <b>
                             DI ISI
                         </b> </h3>
                 </div>

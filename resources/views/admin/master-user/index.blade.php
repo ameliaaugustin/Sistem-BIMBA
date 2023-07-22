@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-header border-bottom">
                             <p>
-                            <h3 class="h4 mb-0">Master User Admin</h3>
+                            <h3 class="h4 mb-0">Manajemen User Admin dan Super Admin</h3>
                             </p>
                             <a class="btn btn-primary" href="{{ route('m_usercreate') }}">Tambah</a>
                         </div>

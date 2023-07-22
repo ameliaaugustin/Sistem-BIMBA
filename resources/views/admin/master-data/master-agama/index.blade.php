@@ -31,6 +31,7 @@
                                             <th>No</th>
                                             <th class="text-center">Nama Agama</th>
                                             <th class="text-center">Aksi</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -40,7 +41,8 @@
                                         @foreach ($master_agama as $ma)
                                             <tr>
                                                 <td colspan="1" style="width: 5%">{{ $count++ }}</td>
-                                                <td class="text-center">{{ $ma->nama_agama }}</td>
+                                                <td class="text-center">{{ $ma->nama_agama }}
+                                                </td>
                                                 <td class="text-center">
                                                     <a class="btn btn-primary"
                                                         href="{{ route('m_agamaedit', $ma->id) }}">Edit</a>
@@ -48,6 +50,7 @@
                                                         class="btn btn-danger"
                                                         href="{{ route('m_agamadestroy', $ma->id) }}">Delete</a>
                                                 </td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>
