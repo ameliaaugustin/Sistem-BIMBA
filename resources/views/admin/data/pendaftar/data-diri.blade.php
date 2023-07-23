@@ -6,43 +6,47 @@
                 <img src="{{ asset('assets') }}/img/logobimba.png" alt="person">
                 <div class="row gy-2 mb-4">
                     <h5 class="card-title">Data Diri</h5>
-                    <label class="col-sm-4">
-                        <p class="card-text">Nama Lengkap</p>
-                        <p class="card-text">Nama Panggilan</p>
-                        <p class="card-text">Tempat,tanggal lahir</p>
-                        <p class="card-text">Jenis Kelamin</p>
-                        <p class="card-text">Asal Sekolah</p>
-                        <p class="card-text">Anak Ke-</p>
-                        <p class="card-text">Hobi</p>
-                        <p class="card-text">Agama</p>
-                    </label>
+                    <div class="col-sm-6">
+                        <label>
+                            <p class="card-text">Nama Lengkap</p>
+                            <p class="card-text">Nama Panggilan</p>
+                            <p class="card-text">Tempat,tanggal lahir</p>
+                            <p class="card-text">Jenis Kelamin</p>
+                            <p class="card-text">Asal Sekolah</p>
+                            <p class="card-text">Anak Ke-</p>
+                            <p class="card-text">Hobi</p>
+                            <p class="card-text">Agama</p>
+                        </label>
+                    </div>
 
-                    <label class="col-sm-8" for="inputHorizontalElOne">
-                        @if ($pendaftar !== null)
+                    <div class="col-sm-6">
+                        <label for="inputHorizontalElOne">
+                            @if ($pendaftar !== null)
 
-                            <p class="card-text">: {{ $pendaftar->nama_lengkap ?? '' }}</p>
-                            <p class="card-text">: {{ $pendaftar->nama_panggilan ?? '' }}</p>
-                            <p class="card-text">:
-                                {{ $pendaftar->tempat_lahir ?? '' }},
-                                {{ date('d-M-Y', strtotime($pendaftar->tanggal_lahir)) ?? '' }}
-                            </p>
-                            <p class="card-text">:
-                                @if ($pendaftar->jenis_kelamin == 'L')
-                                    <span class="text-success">Laki-laki</span>
-                                @elseif ($pendaftar->jenis_kelamin == 'P')
-                                    <span class="text-danger">Perempuan</span>
-                                @else
-                                    <span></span>
-                                @endif
-                            </p>
-                            <p class="card-text">: {{ $pendaftar->asal_sekolah ?? '' }}</p>
-                            <p class="card-text">: {{ $pendaftar->anak_ke ?? '' }}</p>
-                            <p class="card-text">: {{ $pendaftar->hobi ?? '' }}</p>
-                            <p class="card-text">: {{ $pendaftar->nama_agama ?? '' }}
+                                <p class="card-text">: {{ $pendaftar->nama_lengkap ?? '' }}</p>
+                                <p class="card-text">: {{ $pendaftar->nama_panggilan ?? '' }}</p>
+                                <p class="card-text">:
+                                    {{ $pendaftar->tempat_lahir ?? '' }},
+                                    {{ date('d-M-Y', strtotime($pendaftar->tanggal_lahir)) ?? '' }}
+                                </p>
+                                <p class="card-text">:
+                                    @if ($pendaftar->jenis_kelamin == 'L')
+                                        <span class="text-success">Laki-laki</span>
+                                    @elseif ($pendaftar->jenis_kelamin == 'P')
+                                        <span class="text-danger">Perempuan</span>
+                                    @else
+                                        <span></span>
+                                    @endif
+                                </p>
+                                <p class="card-text">: {{ $pendaftar->asal_sekolah ?? '' }}</p>
+                                <p class="card-text">: {{ $pendaftar->anak_ke ?? '' }}</p>
+                                <p class="card-text">: {{ $pendaftar->hobi ?? '' }}</p>
+                                <p class="card-text">: {{ $pendaftar->nama_agama ?? '' }}
 
-                            </p>
-                        @endif
-                    </label>
+                                </p>
+                            @endif
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>

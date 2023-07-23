@@ -65,30 +65,37 @@
             {{-- Select Status --}}
             <div class="col-lg-6">
                 <div class="card">
-                    <div class="card-header">
-                        <h5>KONFIRMASI STATUS
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <form class="form-horizontal" action="{{ route('update_data_pendaftar', $id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <div class="row mb-4">
-                                <select class="form-select" name="status_select">
-                                    <option value="" hidden>Pilih....</option>
-                                    <option value="Y">Diterima</option>
-                                    <option value="N">Dikembalikan</option>
-                                </select>
-                            </div>
-                            <div class="row mb-4">
-                                <textarea class="form-control" name="keterangan" id="" cols="30" rows="5"></textarea>
-                            </div>
+                    @if ($pendaftar->status != 'Y')
+                        <div class="card-header">
+                            <h5>KONFIRMASI STATUS
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <form class="form-horizontal" action="{{ route('update_data_pendaftar', $id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <div class="row mb-4">
+                                    <select class="form-select" name="status_select">
+                                        <option value="" hidden>Pilih....</option>
+                                        <option value="Y">Diterima</option>
+                                        <option value="N">Dikembalikan</option>
+                                    </select>
+                                </div>
+                                <div class="row mb-4">
+                                    <textarea class="form-control" name="keterangan" id="" cols="30" rows="5"></textarea>
+                                </div>
 
-                            <div class="row">
-                                <button type="submit" class="btn btn-primary md-auto">Submit</button>
-                            </div>
-                        </form>
-                    </div>
+                                <div class="row">
+                                    <button type="submit" class="btn btn-primary md-auto">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    @else
+                        <div class="card-header">
+                            <h5 class="text-center text-success">Pendaftar Diterima
+                            </h5>
+                        </div>
+                    @endif
 
                 </div>
             </div>

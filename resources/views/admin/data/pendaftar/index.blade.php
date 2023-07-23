@@ -118,10 +118,8 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-end">
-                                                    @if ($dt_pend->status != 'Y')
-                                                        <a class="btn btn-warning btn-sm"
-                                                            href="{{ route('detail_pendaftar', $dt_pend->id) }}">Detail</a>
-                                                    @endif
+                                                    <a class="btn btn-warning btn-sm"
+                                                        href="{{ route('detail_pendaftar', $dt_pend->id) }}">Detail</a>
                                                 </td>
 
                                             </tr>
