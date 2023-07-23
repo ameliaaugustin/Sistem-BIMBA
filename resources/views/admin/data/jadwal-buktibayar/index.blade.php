@@ -116,10 +116,8 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-end">
-                                                    @if ($jadwal['status_bayar'] != 'Y')
-                                                        <a class="btn btn-warning btn-sm"
-                                                            href="{{ route('detail_jadwal_buktibayar', $jadwal['id_jadwal']) }}">Detail</a>
-                                                    @endif
+                                                    <a class="btn btn-warning btn-sm"
+                                                        href="{{ route('detail_jadwal_buktibayar', $jadwal['id_jadwal']) }}">Detail</a>
                                                 </td>
 
                                             </tr>

@@ -130,6 +130,7 @@ class PendaftarController extends Controller
             'dt_pendaftar.asal_sekolah',
             'dt_pendaftar.anak_ke',
             'dt_pendaftar.hobi',
+            'dt_pendaftar.status',
             'dt_pendaftar.agama',
             'm_agama.nama_agama',
 
