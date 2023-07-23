@@ -8,7 +8,7 @@
             <div class="card-body">
 
                 <div class="row gy-2 mb-4">
-                    <label class="col-sm-4">
+                    <label class="col">
                         <p class="card-text">Nama Ayah</p>
                         <p class="card-text">Tempat, tanggal lahir</p>
                         <p class="card-text">Pendidikan Ayah</p>
@@ -16,7 +16,7 @@
                         <p class="card-text">Alamat Ayah</p>
                         <p class="card-text">No. Telpon</p>
                     </label>
-                    <label class="col-sm-8">
+                    <label class="col">
                         @if ($ayah !== null)
                             <p class="card-text">: {{ $ayah->nama_ayah ?? '' }}</p>
                             <p class="card-text">:
@@ -48,30 +48,34 @@
             <div class="card-body">
 
                 <div class="row gy-2 mb-4">
-                    <label class="col-sm-4">
-                        <p class="card-text">Nama Ibu</p>
-                        <p class="card-text">Tempat, tanggal lahir</p>
-                        <p class="card-text">Pendidikan Ibu</p>
-                        <p class="card-text">Pekerjaan Ibu</p>
-                        <p class="card-text">Alamat Ibu</p>
-                        <p class="card-text">No. Telpon</p>
-                    </label>
-                    <label class="col-sm-8">
-                        @if ($ibu !== null)
-                            <p class="card-text">: {{ $ibu->nama_ibu ?? '' }}</p>
-                            <p class="card-text">:
-                                {{ $ibu->tempat_lahir_ibu ?? '' }},
-                                {{ date('d-M-Y', strtotime($ibu->tgl_lahir_ibu)) ?? '' }}
-                            </p>
+                    <div class="col">
+                        <label>
+                            <p class="card-text">Nama Ibu</p>
+                            <p class="card-text">Tempat, tanggal lahir</p>
+                            <p class="card-text">Pendidikan Ibu</p>
+                            <p class="card-text">Pekerjaan Ibu</p>
+                            <p class="card-text">Alamat Ibu</p>
+                            <p class="card-text">No. Telpon</p>
+                        </label>
+                    </div>
+                    <div class="col">
+                        <label>
+                            @if ($ibu !== null)
+                                <p class="card-text">: {{ $ibu->nama_ibu ?? '' }}</p>
+                                <p class="card-text">:
+                                    {{ $ibu->tempat_lahir_ibu ?? '' }},
+                                    {{ date('d-M-Y', strtotime($ibu->tgl_lahir_ibu)) ?? '' }}
+                                </p>
 
-                            <p class="card-text">: {{ $ibu->pendidikan_ibu ?? '' }}</p>
-                            <p class="card-text">: {{ $ibu->jenis_pekerjaan ?? '' }}</p>
-                            <p class="card-text">: {{ $ibu->alamat_ibu ?? '' }}</p>
-                            <p class="card-text">: {{ $ibu->no_telp_ibu ?? '' }}
+                                <p class="card-text">: {{ $ibu->pendidikan_ibu ?? '' }}</p>
+                                <p class="card-text">: {{ $ibu->jenis_pekerjaan ?? '' }}</p>
+                                <p class="card-text">: {{ $ibu->alamat_ibu ?? '' }}</p>
+                                <p class="card-text">: {{ $ibu->no_telp_ibu ?? '' }}
 
-                            </p>
-                        @endif
-                    </label>
+                                </p>
+                            @endif
+                        </label>
+                    </div>
                 </div>
 
             </div>

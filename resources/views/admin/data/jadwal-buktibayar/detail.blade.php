@@ -24,7 +24,7 @@
 
                         <div class="row gy-2 mb-4">
                             <h5 class="card-title">Data Detail Jadwal Bukti Bayar</h5>
-                            <div class="col-sm-6">
+                            <div class="col">
                                 <label>
                                     <p class="card-text">Nama Lengkap</p>
                                     <p class="card-text">Paket</p>
@@ -36,7 +36,7 @@
                                 </label>
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col">
                                 <label for="inputHorizontalElOne">
                                     @if ($detail !== null)
                                         <p class="card-text">: {{ $detail->nama_lengkap ?? '' }}</p>

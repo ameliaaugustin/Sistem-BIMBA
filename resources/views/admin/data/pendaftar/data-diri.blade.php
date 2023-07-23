@@ -6,7 +6,7 @@
                 <img src="{{ asset('assets') }}/img/logobimba.png" alt="person">
                 <div class="row gy-2 mb-4">
                     <h5 class="card-title">Data Diri</h5>
-                    <div class="col-sm-6">
+                    <div class="col">
                         <label>
                             <p class="card-text">Nama Lengkap</p>
                             <p class="card-text">Nama Panggilan</p>
@@ -19,7 +19,7 @@
                         </label>
                     </div>
 
-                    <div class="col-sm-6">
+                    <div class="col">
                         <label for="inputHorizontalElOne">
                             @if ($pendaftar !== null)
 
