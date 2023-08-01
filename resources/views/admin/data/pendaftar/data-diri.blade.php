@@ -2,8 +2,8 @@
     <div class="col-sm-6">
         <div class="card">
 
-            <div class="card-body">
-                <img src="{{ asset('assets') }}/img/logobimba.png" alt="person">
+            <div class="card-body py-5">
+
                 <div class="row gy-2 mb-4">
                     <h5 class="card-title">Data Diri</h5>
                     <div class="col">

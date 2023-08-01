@@ -46,7 +46,9 @@
                                                 <td class="text-center">
                                                     <a class="btn btn-primary"
                                                         href="{{ route('m_itemedit', $item->id) }}">Edit</a>
-                                                    <a class="btn btn-danger"
+
+                                                    <a onclick="return confirm('Apakah anda yakin ingin menghapus DATA ITEM tersebut?');"
+                                                        class="btn btn-danger"
                                                         href="{{ route('m_itemdestroy', $item->id) }}">Delete</a>
 
                                                 </td>

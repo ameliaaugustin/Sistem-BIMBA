@@ -59,6 +59,7 @@
                                     @endif
                                 </label>
                             </div>
+
                         </div>
                     </div>
 
@@ -79,16 +80,23 @@
                                 @csrf
 
                                 <div class="row mb-4">
-                                    <select class="form-select" name="status_bayar">
-                                        <option value="" hidden>Pilih....</option>
+                                    <select class="form-select @error('status_bayar') is-invalid @enderror"
+                                        name="status_bayar">
+                                        <option value="" hidden>Pilih Status Bayar....</option>
                                         <option value="Y">Pembayaran Diterima</option>
                                         <option value="N">Pembayaran Gagal</option>
                                     </select>
+                                    @error('status_bayar')
+                                        <small class="invalid-feedback text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="row mb-4">
-                                    <textarea class="form-control" name="keterangan" cols="30" rows="5"></textarea>
+                                    <textarea class="form-control @error('keterangan') is-invalid  @enderror" placeholder="Keterangan" name="keterangan"
+                                        cols="30" rows="5"></textarea>
+                                    @error('keterangan')
+                                        <small class="invalid-feedback text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
-
                                 <div class="row">
                                     <button type="submit" class="btn btn-primary md-auto">Submit</button>
                                 </div>

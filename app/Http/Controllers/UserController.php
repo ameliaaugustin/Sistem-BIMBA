@@ -12,8 +12,22 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user =  User::where('user_role_id', '!=', 3)
+        $user =  User::select(
+            'users.id as user_id',
+            'users.user_role_id',
+            'users.fullname',
+            'users.username',
+            'users.email',
+            'users.created_at',
+            'users.updated_at',
+            'user_roles.role_name',
+
+        )
+            ->where('user_role_id', '!=', 3)
+            ->leftjoin('user_roles', 'users.user_role_id', 'user_roles.id')
+
             ->get();
+
         return view('admin.master-user.index', compact('user'));
     }
     public function create()

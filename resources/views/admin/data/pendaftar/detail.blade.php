@@ -75,14 +75,22 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="row mb-4">
-                                    <select class="form-select" name="status_select">
-                                        <option value="" hidden>Pilih....</option>
+                                    <select class="form-select @error('status_select') is-invalid @enderror"
+                                        name="status_select">
+                                        <option value="" hidden>Pilih Status....</option>
                                         <option value="Y">Diterima</option>
                                         <option value="N">Dikembalikan</option>
                                     </select>
+                                    @error('status_select')
+                                        <small class="invalid-feedback text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="row mb-4">
-                                    <textarea class="form-control" name="keterangan" id="" cols="30" rows="5"></textarea>
+                                    <textarea class="form-control @error('keterangan') is-invalid @enderror" placeholder="Keterangan" name="keterangan"
+                                        id="" cols="30" rows="5"></textarea>
+                                    @error('keterangan')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <div class="row">

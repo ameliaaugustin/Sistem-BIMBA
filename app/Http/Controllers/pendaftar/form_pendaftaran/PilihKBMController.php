@@ -39,7 +39,7 @@ class PilihKBMController extends Controller
         }
 
         if ($pendaftar->status != 'Y') {
-            Toastr::warning('Status anda sedang menunggu validasi', 'Silahkan Menunggu');
+            Toastr::warning('Status pendaftaran anda sedang menunggu validasi', 'Silahkan Menunggu');
             return redirect('/');
         }
 

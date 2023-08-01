@@ -44,16 +44,16 @@
                                             <tr>
                                                 <td colspan="1" style="width: 5%">{{ $count++ }}</td>
                                                 <td class="text-center">{{ $dt_user->fullname }}</td>
-                                                <td class="text-center">{{ $dt_user->user_role_id }}</td>
+                                                <td class="text-center">{{ $dt_user->role_name }}</td>
                                                 <td class="text-center">{{ $dt_user->username }}</td>
                                                 <td class="text-center">{{ $dt_user->email }}</td>
                                                 <td class="text-center text-sm mb-0">
                                                     <a class="btn btn-primary text-center"
-                                                        href="{{ route('m_useredit', $dt_user->id) }}">Edit</a>
+                                                        href="{{ route('m_useredit', $dt_user->user_id) }}">Edit</a>
 
                                                     <a onclick="return confirm('Apakah kamu yakin, ingin menghapus akun tersebut?');"
                                                         class="btn btn-danger text-center"
-                                                        href="{{ route('m_userdestroy', $dt_user->id) }}">Delete</a>
+                                                        href="{{ route('m_userdestroy', $dt_user->user_id) }}">Delete</a>
                                                 </td>
 
                                             </tr>

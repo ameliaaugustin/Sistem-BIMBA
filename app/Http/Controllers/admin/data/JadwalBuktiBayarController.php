@@ -234,16 +234,16 @@ class JadwalBuktiBayarController extends Controller
 
     public function update(Request $req, $id)
     {
+        $req->validate([
+            'status_bayar' => ['required'],
+            'keterangan' => ['required'],
+        ]);
 
         $jadwal_siswa = FormJadwalSiswaModel::where('id', $id)
-
             ->update([
                 'dt_jadwal_siswa.status_bayar' => $req->status_bayar,
                 'dt_jadwal_siswa.keterangan'  => $req->keterangan,
             ]);
-
-
-
 
         if ($jadwal_siswa) {
             Toastr::success(' Berhasil ', 'Submit');

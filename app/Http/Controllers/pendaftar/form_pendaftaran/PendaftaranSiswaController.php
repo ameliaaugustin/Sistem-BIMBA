@@ -36,7 +36,6 @@ class PendaftaranSiswaController extends Controller
             ->leftjoin('dt_afiliasi', 'dt_pendaftar.id', 'dt_afiliasi.id_pendaftar')
             ->leftjoin('users', 'dt_pendaftar.user_id', 'users.id')
             ->first();
-        // dd($data);
 
         $data['pekerjaans'] = MasterPekerjaanModel::all();
 

@@ -29,7 +29,6 @@ class PendaftarController extends Controller
             ->orderBy('created_at', 'DESC')
             ->paginate(5);
 
-        // dd($status);
         return view('admin.data.pendaftar.index', compact('dt_pendaftar', 'search', 'status'));
     }
 
@@ -66,7 +65,7 @@ class PendaftarController extends Controller
                 $query->where('status', $status);
             })->orderBy('dt_pendaftar.created_at', 'DESC')
             ->get();
-        // dd($dt_pendaftar);
+
         $count = 1;
         if (count($dt_pendaftar) > 0) {
             foreach ($dt_pendaftar as $key => $value) {
@@ -91,7 +90,7 @@ class PendaftarController extends Controller
 
 
                 $ttl =  $value->tempat_lahir . '-' . date('d-M-Y', strtotime($value->tanggal_lahir ?? ''));
-                // dd($ttl);
+
                 $activeSheet->setCellValue('A' . $new_key, $count++);
                 $activeSheet->setCellValue('B' . $new_key, $value->nama_lengkap);
                 $activeSheet->setCellValue('C' . $new_key, $value->nama_panggilan);
@@ -115,7 +114,6 @@ class PendaftarController extends Controller
             Toastr::success('Data Telah di Eksport', 'Berhasil');
             $writer->save('php://output');
         }
-        // dd($status, $dt_pendaftar);
     }
 
     public function detail($id)
@@ -210,6 +208,10 @@ class PendaftarController extends Controller
     }
     public function update(Request $req, $id)
     {
+        $req->validate([
+            'status_select' => ['required'],
+            'keterangan' => ['required'],
+        ]);
 
         $pendaftar = PendaftaranSiswaModel::where('id', $id)
 
@@ -217,9 +219,6 @@ class PendaftarController extends Controller
                 'dt_pendaftar.status' => $req->status_select,
                 'dt_pendaftar.keterangan'  => $req->keterangan,
             ]);
-
-
-
 
         if ($pendaftar) {
             Toastr::success(' Berhasil ', 'Submit');
