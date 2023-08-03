@@ -101,6 +101,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/update{id}', [MasterPaketController::class, 'update'])->name('m_paketupdate');
         Route::get('/destroy/{id}', [MasterPaketController::class, 'destroy'])->name('m_paketdestroy');
     });
+
     Route::prefix('master-item-bayar')->group(function () {
         Route::get('/', [Item_bayarController::class, 'index'])->name('m_item');
         Route::get('/create', [Item_bayarController::class, 'create'])->name('m_itemcreate');
@@ -109,8 +110,6 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/update{id}', [Item_bayarController::class, 'update'])->name('m_itemupdate');
         Route::get('/destroy/{id}', [Item_bayarController::class, 'destroy'])->name('m_itemdestroy');
     });
-
-
 
     Route::prefix('master-user')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('manajemen_user');
@@ -133,58 +132,24 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/form-pilih-jadwal/get-price', [PilihKBMController::class, 'getPrice'])->name('getPrice');
     Route::post('/form-pilih-jadwal-save', [PilihKBMController::class, 'saveFormJadwal'])->name('saveFormJadwal');
 
-
     Route::get('/form-dokumen', [PendaftaranSiswaController::class, 'formDokumen'])->name('form_dokumen');
     Route::put('/form-dokumen-save', [PendaftaranSiswaController::class, 'saveformDokumen'])->name('save_form_dokumen');
 
     Route::get('/data-pendaftar', [PendaftarController::class, 'index'])->name('data_pendaftar');
     Route::get('/detail-pendaftar/{id}', [PendaftarController::class, 'detail'])->name('detail_pendaftar');
     Route::put('/update/{id}', [PendaftarController::class, 'update'])->name('update_data_pendaftar');
-    // Route::get('/cetakpendaftar', [CetakPendaftarController::class, 'CetakPendaftar'])->name('CetakPendaftar');
-
-
+    Route::get('/excel-data-pendaftar/{status}', [PendaftarController::class, 'excel'])->name('cetak_data_pend');
 
     Route::get('/data-jadwal-bukti-bayar', [JadwalBuktiBayarController::class, 'index'])->name('data_jadwal_buktibayar');
     Route::get('/detail-jadwal-bukti-bayar/{id}', [JadwalBuktiBayarController::class, 'detail'])->name('detail_jadwal_buktibayar');
     Route::post('/submit/{id}', [JadwalBuktiBayarController::class, 'update'])->name('update_jadwal_buktibayar');
+    Route::get('/excel-data-jadwal-buktibayar/{status_bayar}', [JadwalBuktiBayarController::class, 'excel'])->name('cetak_data_jadwalbuktibayar');
 
     Route::get('/data-affiliasi', [AffiliasiController::class, 'index'])->name('data_affiliasi');
-
-
-
-
-    Route::get('/excel-data-pendaftar/{status}', [PendaftarController::class, 'excel'])->name('cetak_data_pend');
-    Route::get('/excel-data-jadwal-buktibayar/{status_bayar}', [JadwalBuktiBayarController::class, 'excel'])->name('cetak_data_jadwalbuktibayar');
     Route::get('/excel-data-afiliasi/{role_search}', [AffiliasiController::class, 'excel'])->name('cetak_data_affiliasi');
-
 
     Route::get('validasi-pendaftar/{user}', [HomeController::class, 'getStatus'])->name('get_status');
     Route::get('validasi-pembayaray/{user}', [HomeController::class, 'getStatuspembayaran'])->name('get_status_pembayaran');
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Route::prefix('master-pekerjaan')->group(function(){
-//     Route::get('/', [MasterPekerjaanController])
-// });
-
-
-
-
-
-//halaman single isi blog
-
 Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

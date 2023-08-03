@@ -47,7 +47,9 @@
                                             @endforeach
                                             {{ $detail->jam_mulai . '-' . $detail->jam_selesai ?? '' }}
                                         </p>
-                                        <p class="card-text">: {{ $total_bayar ?? '' }}</p>
+                                        <p class="card-text">: Rp.
+                                            {{ number_format($detail->total_bayar, 2, ',', '.') ?? '' }}
+                                        </p>
                                         <p class="card-text">:
                                             @if ($detail->metode_bayar == 'CASH')
                                                 Cash

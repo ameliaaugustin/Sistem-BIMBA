@@ -83,15 +83,21 @@
                                         <p class="card-text">Harga Paket</p>
                                     </label>
                                     <label class="col-sm-6">
-                                        <input type="text" id="harga_paket" disabled>
+                                        <div class="row">
+                                            <div class="col">
+                                                <input type="text" id="harga_paket" disabled>
+                                            </div>
+                                            <div class="col">
+                                                / Bulan
+                                            </div>
+                                        </div>
                                     </label>
 
                                     <label class="col-sm-4">
                                         <p class="card-text"><strong>Total Bayar </strong></p>
                                     </label>
                                     <label class="col-sm-6">
-                                        <input type="text" id="total_bayar" disabled>
-
+                                        <input type="text" name="total_bayar" id="total_bayar" readonly>
                                     </label>
                                 </div>
                             </div>
@@ -233,7 +239,7 @@
                     paket: paket
                 },
                 success: function(data) {
-                    $('#harga_paket').val(data.biaya_paket + '/Bulan');
+                    $('#harga_paket').val(data.biaya_paket);
                     $('#total_bayar').val(data.total_bayar);
                     // toastr(message);
                 },

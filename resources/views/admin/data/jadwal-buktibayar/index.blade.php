@@ -104,7 +104,7 @@
                                                 </td>
 
                                                 <td class="text-center">
-                                                    {{ $jadwal['total_biaya'] }}
+                                                    Rp. {{ number_format($jadwal['total_bayar'], 2, ',', '.') }}
                                                 </td>
                                                 <td class="text-center">
                                                     @if ($jadwal['status_bayar'] == 'Y')

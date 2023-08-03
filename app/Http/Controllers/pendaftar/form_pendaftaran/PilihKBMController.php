@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\pendaftar\form_pendaftaran;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\admin\master_data\MasterDokumenModel;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Storage;
 use App\Models\admin\master_data\MasterHariModel;
 use App\Models\admin\master_data\MasterPaketModel;
+use App\Models\admin\master_data\MasterDokumenModel;
 use App\Models\admin\master_data\MasterJamPelajaranModel;
 use App\Models\pendaftar\form_pendaftaran\FormDokumenModel;
 use App\Models\pendaftar\form_pendaftaran\FormJadwalSiswaModel;
@@ -81,6 +82,23 @@ class PilihKBMController extends Controller
     {
         $paket = MasterPaketModel::find($req->paket);
 
+        $tgl_hari_ini = date('Y-m-d');
+        $str_today = strtotime($tgl_hari_ini);
+
+        $batas_flaging_tgl = Carbon::createFromFormat('Y-m-d', $tgl_hari_ini);
+        $batas_flaging_tgl->setDay(15);
+        $batas_flaging_tgl->toDateString();
+        $str_tgl_limit = strtotime($batas_flaging_tgl);
+
+        // Bandingkan tanggal pendaftaran dengan tanggal batas
+        if ($str_today <= $str_tgl_limit) {
+            // Biaya bimbingan penuh jika pendaftaran sebelum tanggal 15
+            $biaya_paket = $paket->biaya_paket;
+        } else {
+            // Kurangi biaya 50% jika pendaftaran setelah tanggal 15
+            $biaya_paket = $paket->biaya_paket / 2;
+        }
+
         $item_bayar = DB::table('m_item_bayar')->get()->pluck('biaya_item');
 
         $arr_item = [];
@@ -91,11 +109,11 @@ class PilihKBMController extends Controller
 
         $jml_total_item = array_sum($arr_item);
 
-        $total_bayar = $jml_total_item + $paket->biaya_paket;
+        $total_bayar = $jml_total_item + $biaya_paket;
 
         return response()->json([
             'message' => "Total Biaya Sudah Didapatkan",
-            'biaya_paket' => $paket->biaya_paket,
+            'biaya_paket' => $biaya_paket,
             'total_bayar' => $total_bayar
         ]);
     }
@@ -131,6 +149,7 @@ class PilihKBMController extends Controller
             'count_jadwal' => count($jadwals)
         ]);
     }
+
     public function saveFormJadwal(Request $req)
     {
         $req->validate([
@@ -159,6 +178,7 @@ class PilihKBMController extends Controller
                 [
                     'id_jam_pelajaran' => $req->jadwal,
                     'metode_bayar' => $req->metode_bayar,
+                    'total_bayar' => $req->total_bayar,
                 ]
             );
 
