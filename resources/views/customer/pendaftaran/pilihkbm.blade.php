@@ -40,15 +40,6 @@
                                 <select class="form-select col-sm-6 @error('jadwal') is-invalid @enderror" name="jadwal"
                                     id="jadwal">
                                     <option value="" hidden>Pilih Jadwal</option>
-                                    @foreach ($jadwals as $key => $jadwal)
-                                        <option value="{{ $key }}">
-                                            @foreach ($jadwal['hari'] as $hari)
-                                                {{ $hari['nama_hari'] }}
-                                            @endforeach
-                                            {{ $jadwal['sesi_jam'] }}
-                                        </option>
-                                    @endforeach
-
                                 </select>
                                 @error('jadwal')
                                     <small class="form-text text-danger">{{ $message }}</small>
@@ -183,22 +174,24 @@
                 if (paket) {
                     $.ajax({
                         method: "GET",
-                        url: "{{ route('getJadwal') }}",
-                        dataType: "JSON",
+                        url: "{{ route('getJadwal') }}", // Ganti dengan rute yang benar
+                        dataType: "json",
                         data: {
                             paket: paket
                         },
                         success: function(data) {
                             var data_jadwal = data.jadwals;
+                            console.log(data_jadwal);
                             $('#jadwal').find("option").not(":first").remove();
                             if (data.count_jadwal > 0) {
-
                                 $.each(data_jadwal, function(key, value) {
                                     var hari = value.hari;
+                                    var nama_hari = hari.map(h => h.nama_hari).join(
+                                        ', ');
                                     $('#jadwal').append(
                                         $("<option>", {
                                             value: value.id_jadwal,
-                                            text: data.hari + " " + value
+                                            text: nama_hari + " " + value
                                                 .sesi_jam
                                         })
                                     )
@@ -208,11 +201,13 @@
                                     'Jadwal belum tersedia atau sudah penuh, Harap hubungi admin'
                                 );
                             }
-
                         },
-                    })
+                        error: function() {
+                            toastr.error('Gagal memuat data jadwal');
+                        }
+                    });
                 }
-            })
+            });
 
             $('#metode_bayar').change(function() {
                 var metode_bayar = $(this).val();
