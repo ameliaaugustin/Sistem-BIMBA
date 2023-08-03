@@ -31,7 +31,7 @@ class PilihKBMController extends Controller
 
         $m_dokumen = MasterDokumenModel::count();
         $dt_dokumen = FormDokumenModel::where('id_pendaftar', $pendaftar->id)->count();
-        // dd($dt_dokumen, $m_dokumen);
+
         $going_jadwal = $dt_dokumen == $m_dokumen;
 
         if ($going_jadwal != true) {
@@ -133,19 +133,14 @@ class PilihKBMController extends Controller
                 ->get()->toArray();
 
             $jadwals[$value->id] = [
+                'hari' => $data_hari,
                 'sesi_jam' => $value->jam_mulai . ' - ' . $value->jam_selesai,
                 'id_jadwal' => $value->id
             ];
         }
 
-        $hari = [];
-        foreach ($data_hari as $values) {
-            $hari[] = $values['nama_hari'];
-        }
-
         return response()->json([
             'jadwals' => $jadwals,
-            'hari' => $hari,
             'count_jadwal' => count($jadwals)
         ]);
     }
